@@ -20,9 +20,8 @@
 #include "five_dmverity.h"
 #include "five.h"
 #include "five_testing.h"
-
+#include "five_porting.h"
 #include "drivers/md/dm.h"
-#include "drivers/block/loop.h"
 
 #ifdef CONFIG_FIVE_DEBUG
 #include <linux/debugfs.h>
@@ -423,4 +422,10 @@ static inline int __init init_fs(void)
 {
 	return 0;
 }
+#endif
+
+#if defined(CONFIG_SEC_KUNIT)
+EXPORT_SYMBOL_GPL(is_loop_device);
+EXPORT_SYMBOL_GPL(is_dmverity_partition);
+EXPORT_SYMBOL_GPL(five_is_dmverity_protected);
 #endif
